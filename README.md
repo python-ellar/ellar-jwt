@@ -6,9 +6,9 @@
 
 ![Test](https://github.com/eadwinCode/ellar-jwt/actions/workflows/test_full.yml/badge.svg)
 ![Coverage](https://img.shields.io/codecov/c/github/eadwinCode/ellar-jwt)
-[![PyPI version](https://badge.fury.io/py/ellar-throttler.svg)](https://badge.fury.io/py/ellar-jwt)
-[![PyPI version](https://img.shields.io/pypi/v/ellar-throttler.svg)](https://pypi.python.org/pypi/ellar-jwt)
-[![PyPI version](https://img.shields.io/pypi/pyversions/ellar-throttler.svg)](https://pypi.python.org/pypi/ellar-jwt)
+[![PyPI version](https://badge.fury.io/py/ellar-jwt.svg)](https://badge.fury.io/py/ellar-jwt)
+[![PyPI version](https://img.shields.io/pypi/v/ellar-jwt.svg)](https://pypi.python.org/pypi/ellar-jwt)
+[![PyPI version](https://img.shields.io/pypi/pyversions/ellar-jwt.svg)](https://pypi.python.org/pypi/ellar-jwt)
 
 
 ## Introduction
