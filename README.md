@@ -62,7 +62,8 @@ class AuthService:
 ## JWTModule Setup
 There are two ways in config JWTModule
 - **setup**: 
-    `JWTModule.setup` takes some parameters that allows instance configuration of the `JWTConfiguration` schema required by the `JWTService`
+
+  `JWTModule.setup` takes some parameters that allows instance configuration of the `JWTConfiguration` schema required by the `JWTService`
     
     For example:
     ```python
