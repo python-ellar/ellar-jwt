@@ -49,6 +49,14 @@ class AuthService:
   def __init__(self, jwt_service: JWTService) -> None:
     self.jwt_service = jwt_service
 
+  async def sign_in(self, username: str, password: str) -> t.Dict:
+      user = await self.user_service.find_one(username)
+      if user.password != credentials.password:
+          raise HTTPException(status_code=status.HTTP_403_FORBIDDEN)
+
+      return {
+          'access_token': await self.jwt_service.sign_async(user.dict())
+      }
 ```
 
 ## JWTModule Setup
