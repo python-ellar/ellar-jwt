@@ -16,7 +16,6 @@ class Token:
         self.payload: t.Dict = {}
 
     def build(self, payload: t.Dict) -> t.Dict:
-
         # Set "exp" and "iat" claims with default value
         self.set_exp()
         self.set_iat()
