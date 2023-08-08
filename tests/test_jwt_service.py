@@ -242,7 +242,6 @@ class TestJWTService:
         ],
     )
     def test_decode_with_invalid_sig(self, title, backend):
-
         payload = self.payload.copy()
         payload["exp"] = aware_utcnow() + timedelta(days=1)
         token_1 = jwt.encode(

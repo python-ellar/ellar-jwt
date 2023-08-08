@@ -1,6 +1,6 @@
-"""Event Emitter module for Ellar python framework"""
+"""JWT Module for Ellar"""
 
-__version__ = "0.1.0"
+__version__ = "0.1.2"
 from .module import JWTModule
 from .schemas import JWTConfiguration
 from .services import JWTService
