@@ -39,9 +39,7 @@ jobs:
         run: flit install --symlink
       - name: Black
         run: black --check ellar_jwt tests
-      - name: isort
-        run: isort --check ellar_jwt tests
-      - name: Flake8
-        run: flake8 ellar_jwt tests
+      - name: Linting check
+        run: ruff check ellar_jwt tests &  ruff check tests
       - name: mypy
         run: mypy ellar_jwt

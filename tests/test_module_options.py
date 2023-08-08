@@ -30,15 +30,15 @@ def test_jwt_module_configuration_case_1():
 def test_jwt_module_configuration_case_2():
     tm = Test.create_test_module(
         modules=[JWTModule.register_setup()],
-        config_module=dict(
-            JWT_CONFIG=dict(
-                algorithm="HS256",
-                signing_secret_key="no_secret",
-                issuer="https://ellar.com",
-                lifetime=timedelta(minutes=30),
-                leeway=None,
-            )
-        ),
+        config_module={
+            "JWT_CONFIG": {
+                "algorithm": "HS256",
+                "signing_secret_key": "no_secret",
+                "issuer": "https://ellar.com",
+                "lifetime": timedelta(minutes=30),
+                "leeway": None,
+            }
+        },
     )
     jwt_service: JWTService = tm.get(JWTService)
 

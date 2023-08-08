@@ -44,7 +44,9 @@ class JWTService:
 
         return self.jwt_config.verifying_secret_key.encode()
 
-    def sign(self, payload: dict, headers: t.Dict[str, t.Any] = None) -> str:
+    def sign(
+        self, payload: dict, headers: t.Optional[t.Dict[str, t.Any]] = None
+    ) -> str:
         """
         Returns an encoded token for the given payload dictionary.
         """
@@ -60,7 +62,7 @@ class JWTService:
         )
 
     async def sign_async(
-        self, payload: dict, headers: t.Dict[str, t.Any] = None
+        self, payload: dict, headers: t.Optional[t.Dict[str, t.Any]] = None
     ) -> str:
         return await anyio.to_thread.run_sync(self.sign, payload, headers)
 

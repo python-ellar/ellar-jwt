@@ -19,14 +19,14 @@ install-full: ## Install dependencies
 
 lint: ## Run code linters
 	black --check ellar_jwt tests
-	isort --check ellar_jwt tests
-	autoflake --remove-unused-variables --remove-unused-variables -r ellar_jwt tests
-	flake8 ellar_jwt tests
+	ruff check ellar_jwt
+	ruff check tests
 	mypy ellar_jwt
 
 fmt format: ## Run code formatters
 	black ellar_jwt tests
-	isort ellar_jwt tests
+	ruff check --fix ellar_jwt
+	ruff check --fix tests
 
 test: ## Run tests
 	pytest tests

@@ -6,6 +6,7 @@ from ellar.common import IModuleSetup, Module
 from ellar.core import Config, ModuleSetup
 from ellar.core.modules import DynamicModule, ModuleBase
 from ellar.di import ProviderConfig
+from pydantic import AnyHttpUrl
 
 from .schemas import JWTConfiguration
 from .services import JWTService
@@ -17,19 +18,19 @@ class JWTModule(ModuleBase, IModuleSetup):
     def setup(
         cls,
         signing_secret_key: str,
-        verifying_secret_key: t.Optional[str] = "",
+        verifying_secret_key: str = "",
         algorithm: str = "HS256",
-        audience: str = None,
-        issuer: str = None,
-        jwk_url: str = None,
+        audience: t.Optional[str] = None,
+        issuer: t.Optional[str] = None,
+        jwk_url: t.Optional[AnyHttpUrl] = None,
         leeway: t.Union[float, int, timedelta] = 0,
         jti: str = "jti",
-        lifetime: timedelta = None,
+        lifetime: t.Optional[timedelta] = None,
         json_encoder: t.Any = json.JSONEncoder,
     ) -> DynamicModule:
         configuration = JWTConfiguration(
             signing_secret_key=signing_secret_key,
-            algorithm=algorithm,
+            algorithm=algorithm,  # type: ignore[arg-type]
             audience=audience,
             issuer=issuer,
             jwk_url=jwk_url,
