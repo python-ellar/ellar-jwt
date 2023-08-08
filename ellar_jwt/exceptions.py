@@ -1,0 +1,2 @@
+class JWTTokenException(Exception):
+    pass
