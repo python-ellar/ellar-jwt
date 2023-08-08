@@ -43,7 +43,8 @@ dependencies = [
     "ellar >= 0.4.2",
     "pyjwt>=1.7.1,<3",
     "pyjwt[crypto]",
-    "python-dateutil"
+    "python-dateutil",
+    "pytz",
 ]
 
 crypto = [
