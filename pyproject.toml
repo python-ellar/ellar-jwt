@@ -40,9 +40,10 @@ classifiers = [
 ]
 
 dependencies = [
-    "ellar >= 0.4.2",
+    "ellar >= 0.4.4",
     "pyjwt>=1.7.1,<3",
     "pyjwt[crypto]",
+    "python-dateutil"
 ]
 
 crypto = [
