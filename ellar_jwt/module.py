@@ -56,10 +56,8 @@ class JWTModule(ModuleBase, IModuleSetup):
     def register_setup_factory(
         module: t.Type["JWTModule"], config: Config
     ) -> DynamicModule:
-        if config.get("JWT_CONFIG"):
-            schema = JWTConfiguration(
-                **dict(config.JWT_CONFIG)  # type:ignore[arg-type]
-            )
+        if config.get("JWT_CONFIG") and isinstance(config.JWT_CONFIG, dict):
+            schema = JWTConfiguration(**dict(config.JWT_CONFIG))
             return DynamicModule(
                 module,
                 providers=[
