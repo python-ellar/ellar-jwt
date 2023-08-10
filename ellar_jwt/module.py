@@ -36,7 +36,7 @@ class JWTModule(ModuleBase, IModuleSetup):
             jwk_url=jwk_url,
             leeway=leeway,
             jti=jti,
-            lifetime=lifetime or timedelta(minutes=1),
+            lifetime=lifetime or timedelta(minutes=5),
             json_encoder=json_encoder,
         )
 
