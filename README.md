@@ -198,16 +198,16 @@ JSON Encoder class that will be used by the `PYJWT` to encode the `jwt_payload`.
 
 The `JwtService` uses [PYJWT](https://pypi.org/project/PyJWT/) underneath.
 
-### _jwt_service.sign(payload: dict, headers: Dict[str, t.Any] = None) -> str_
-Creates a jwt token for the provided payload
+### _jwt_service.sign(payload: dict, headers: Dict[str, t.Any] = None, **jwt_config: t.Any) -> str_
+Creates a jwt token for the provided payload. Also, you can override default jwt config by using passing some keyword argument as a `jwt_config`
 
-### _jwt_service.sign_async(payload: dict, headers: Dict[str, t.Any] = None) -> str_
+### _jwt_service.sign_async(payload: dict, headers: Dict[str, t.Any] = None, **jwt_config: t.Any) -> str_
 Async action for `jwt_service.sign`
 
-### _jwt_service.decode(token: str, verify: bool = True) -> t.Dict[str, t.Any]:_
+### _jwt_service.decode(token: str, verify: bool = True, **jwt_config: t.Any) -> t.Dict[str, t.Any]:_
 Verifies and decodes provided token. And raises JWTException exception if token is invalid or expired
 
-### _jwt_service.decode_async(token: str, verify: bool = True) -> t.Dict[str, t.Any]:_
+### _jwt_service.decode_async(token: str, verify: bool = True, **jwt_config: t.Any) -> t.Dict[str, t.Any]:_
 Async action for `jwt_service.decode`
 
 
