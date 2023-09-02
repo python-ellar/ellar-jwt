@@ -471,3 +471,18 @@ class TestJWTService:
         token = await backend.sign_async(self.payload)
         decoded = await backend.decode_async(token)
         assert decoded["uuid"] == str(unique)
+
+    @pytest.mark.asyncio
+    async def test_sign_async_with_override_jwt_config(self):
+        backend = JWTService(
+            JWTConfiguration(
+                algorithm="HS256",
+                signing_secret_key=SECRET,
+                json_encoder=UUIDJSONEncoder,
+            )
+        )
+        unique = uuid.uuid4()
+        self.payload["uuid"] = unique
+        token = await backend.sign_async(self.payload, algorithm="HS384")
+        decoded = await backend.decode_async(token, algorithm="HS384")
+        assert decoded["uuid"] == str(unique)
