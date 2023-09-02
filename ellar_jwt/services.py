@@ -1,3 +1,4 @@
+import functools
 import typing as t
 from datetime import timedelta
 
@@ -75,7 +76,10 @@ class JWTService:
         headers: t.Optional[t.Dict[str, t.Any]] = None,
         **jwt_config: t.Any,
     ) -> str:
-        return await anyio.to_thread.run_sync(self.sign, payload, headers, **jwt_config)
+        func = self.sign
+        if jwt_config:
+            func = functools.partial(self.sign, **jwt_config)
+        return await anyio.to_thread.run_sync(func, payload, headers)
 
     def decode(
         self, token: str, verify: bool = True, **jwt_config: t.Any
@@ -109,4 +113,7 @@ class JWTService:
     async def decode_async(
         self, token: str, verify: bool = True, **jwt_config: t.Any
     ) -> t.Dict[str, t.Any]:
-        return await anyio.to_thread.run_sync(self.decode, token, verify, **jwt_config)
+        func = self.decode
+        if jwt_config:
+            func = functools.partial(self.decode, **jwt_config)
+        return await anyio.to_thread.run_sync(func, token, verify)
