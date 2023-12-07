@@ -4,6 +4,7 @@ from datetime import timedelta
 
 import anyio
 import jwt
+from ellar.common import serialize_object
 from ellar.di import injectable
 from jwt import InvalidAlgorithmError, InvalidTokenError, PyJWKClient, PyJWKClientError
 
@@ -20,7 +21,9 @@ class JWTService:
         self.jwt_config = jwt_config
 
     def get_jwks_client(self, jwt_config: JWTConfiguration) -> t.Optional[PyJWKClient]:
-        jwks_client = PyJWKClient(jwt_config.jwk_url) if jwt_config.jwk_url else None
+        jwks_client = (
+            PyJWKClient(str(jwt_config.jwk_url)) if jwt_config.jwk_url else None
+        )
         return jwks_client
 
     def get_leeway(self, jwt_config: JWTConfiguration) -> timedelta:
@@ -60,7 +63,9 @@ class JWTService:
         Returns an encoded token for the given payload dictionary.
         """
         _jwt_config = self._merge_configurations(**jwt_config)
-        jwt_payload = Token(jwt_config=_jwt_config).build(payload.copy())
+        jwt_payload = Token(jwt_config=_jwt_config).build(
+            serialize_object(payload.copy())
+        )
 
         return jwt.encode(
             jwt_payload,
@@ -93,7 +98,7 @@ class JWTService:
         """
         try:
             _jwt_config = self._merge_configurations(**jwt_config)
-            return jwt.decode(  # type: ignore[no-any-return]
+            return jwt.decode(  # type:ignore[no-any-return]
                 token,
                 self.get_verifying_key(token, _jwt_config),
                 algorithms=[_jwt_config.algorithm],

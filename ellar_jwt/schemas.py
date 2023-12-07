@@ -3,8 +3,8 @@ import typing as t
 from datetime import timedelta
 
 from ellar.common import Serializer
+from ellar.pydantic import AnyUrl, Field, field_validator
 from jwt import algorithms
-from pydantic import AnyHttpUrl, Field, validator
 
 
 class JWTConfiguration(Serializer):
@@ -26,14 +26,14 @@ class JWTConfiguration(Serializer):
     audience: t.Optional[str] = Field(None)
 
     issuer: t.Optional[str] = Field(None)
-    jwk_url: t.Optional[AnyHttpUrl] = Field(None)
+    jwk_url: t.Optional[AnyUrl] = Field(None)
 
     jti: t.Optional[str] = Field("jti")
     lifetime: timedelta = Field(timedelta(minutes=5))
 
     json_encoder: t.Any = Field(default=json.JSONEncoder)
 
-    @validator("algorithm")
+    @field_validator("algorithm", mode="before")
     def _validate_algorithm(cls, value: str) -> str:
         """
         Ensure that the nominated algorithm is recognized, and that cryptography is installed for those

@@ -37,9 +37,7 @@ jobs:
         run: pip install flit
       - name: Install Dependencies
         run: flit install --symlink
-      - name: Black
-        run: black --check ellar_jwt tests
       - name: Linting check
-        run: ruff check ellar_jwt tests &  ruff check tests
+        run: ruff check ellar_jwt tests
       - name: mypy
         run: mypy ellar_jwt

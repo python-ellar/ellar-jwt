@@ -40,7 +40,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "ellar >= 0.4.4",
+    "ellar >= 0.5.8",
     "pyjwt>=1.7.1,<3",
     "pyjwt[crypto]"
 ]
@@ -62,11 +62,8 @@ Homepage = "https://eadwincode.github.io/ellar-jwt/"
 test = [
     "pytest >= 7.1.3,<8.0.0",
     "pytest-cov >= 2.12.0,<5.0.0",
-    "mypy == 1.5.1",
     "ruff ==0.1.7",
     "mypy == 1.7.1",
-    "ruff ==0.1.7",
-    "black == 23.11.0",
     "pytest-asyncio",
     "autoflake",
     "types-python-dateutil",
@@ -93,3 +90,22 @@ ignore = [
 
 [tool.ruff.isort]
 known-third-party = ["ellar"]
+
+[tool.mypy]
+
+show_column_numbers = true
+
+follow_imports = 'normal'
+ignore_missing_imports = true
+
+# be strict
+disallow_untyped_calls = true
+warn_return_any = true
+strict_optional = true
+warn_no_return = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+
+disallow_untyped_defs = true
+check_untyped_defs = true
+implicit_reexport = false
