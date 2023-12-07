@@ -5,7 +5,6 @@ from datetime import timedelta
 import anyio
 import jwt
 from ellar.common import serialize_object
-from ellar.core import Config
 from ellar.di import injectable
 from jwt import InvalidAlgorithmError, InvalidTokenError, PyJWKClient, PyJWKClientError
 
@@ -18,9 +17,8 @@ __all__ = ["JWTService"]
 
 @injectable
 class JWTService:
-    def __init__(self, jwt_config: JWTConfiguration, config: Config) -> None:
+    def __init__(self, jwt_config: JWTConfiguration) -> None:
         self.jwt_config = jwt_config
-        self._encoders = config.SERIALIZER_CUSTOM_ENCODER
 
     def get_jwks_client(self, jwt_config: JWTConfiguration) -> t.Optional[PyJWKClient]:
         jwks_client = (
@@ -66,7 +64,7 @@ class JWTService:
         """
         _jwt_config = self._merge_configurations(**jwt_config)
         jwt_payload = Token(jwt_config=_jwt_config).build(
-            serialize_object(payload.copy(), encoders=self._encoders)
+            serialize_object(payload.copy())
         )
 
         return jwt.encode(

@@ -41,7 +41,7 @@ class UUIDJSONEncoder(JSONEncoder):
 
 class TestJWTService:
     hmac_token_backend = JWTService(
-        JWTConfiguration(algorithm="HS256", signing_secret_key=SECRET)
+        JWTConfiguration(algorithm="HS256", signing_secret_key=SECRET),
     )
     hmac_leeway_token_backend = JWTService(
         JWTConfiguration(algorithm="HS256", signing_secret_key=SECRET, leeway=LEEWAY)
@@ -95,7 +95,8 @@ class TestJWTService:
         # Should reject unknown algorithms
         with pytest.raises(ValueError):
             JWTConfiguration(
-                algorithm="oienarst oieanrsto i", signing_secret_key="not_secret"
+                algorithm="oienarst oieanrsto i",
+                signing_secret_key="not_secret",
             )
 
         JWTConfiguration(algorithm="HS256", signing_secret_key="not_secret")
