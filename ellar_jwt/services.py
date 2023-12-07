@@ -98,9 +98,9 @@ class JWTService:
         """
         try:
             _jwt_config = self._merge_configurations(**jwt_config)
-            return jwt.decode(
+            return jwt.decode(  # type:ignore[no-any-return]
                 token,
-                self.get_verifying_key(token, _jwt_config),  # type:ignore[arg-type]
+                self.get_verifying_key(token, _jwt_config),
                 algorithms=[_jwt_config.algorithm],
                 audience=_jwt_config.audience,
                 issuer=_jwt_config.issuer,
