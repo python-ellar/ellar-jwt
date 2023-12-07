@@ -18,12 +18,11 @@ install-full: ## Install dependencies
 	pre-commit install -f
 
 lint: ## Run code linters
-	black --check ellar_jwt tests
 	ruff check ellar_jwt tests
 	mypy ellar_jwt
 
 fmt format: ## Run code formatters
-	black ellar_jwt tests
+	ruff format ellar_jwt tests
 	ruff check --fix ellar_jwt tests
 
 test: ## Run tests
