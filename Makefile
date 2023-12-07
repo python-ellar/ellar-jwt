@@ -9,6 +9,7 @@ clean: ## Removing cached python compiled files
 	find . -name \*pyo | xargs  rm -fv
 	find . -name \*~  | xargs  rm -fv
 	find . -name __pycache__  | xargs  rm -rfv
+	find . -name .ruff_cache  | xargs  rm -rfv
 
 install: ## Install dependencies
 	flit install --deps develop --symlink
@@ -17,11 +18,11 @@ install-full: ## Install dependencies
 	make install
 	pre-commit install -f
 
-lint: ## Run code linters
+lint:fmt ## Run code linters
 	ruff check ellar_jwt tests
 	mypy ellar_jwt
 
-fmt format: ## Run code formatters
+fmt format:clean ## Run code formatters
 	ruff format ellar_jwt tests
 	ruff check --fix ellar_jwt tests
 
