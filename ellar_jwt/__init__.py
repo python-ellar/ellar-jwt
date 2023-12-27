@@ -1,6 +1,6 @@
 """JWT Module for Ellar"""
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 from .module import JWTModule
 from .schemas import JWTConfiguration
 from .services import JWTService
