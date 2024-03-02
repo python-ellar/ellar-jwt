@@ -77,7 +77,7 @@ There are two ways in config JWTModule
     ```
 - **register**:
 
-    `JWTModule.register` allow you to provide JWT configuration in Ellar application config object using `JWT_CONFIG` key. 
+    `JWTModule.register` lets you provide JWT configuration in the Ellar application config object using the `JWT_CONFIG` key. 
     The register function will create a `ModuleSetup` object that will inject application `config` to a JWT config factory
     
     for example:
@@ -101,7 +101,7 @@ There are two ways in config JWTModule
             'jti': "jti",
             'lifetime': timedelta(minutes=5), # token lifetime, this will example in 5 mins
         
-            'json_encoder':json.JSONEncoder # token lifetime, this will example 
+            'json_encoder':json.JSONEncoder # token lifetime, this will be an example 
         }
     ```
     In `auth/module.py`
@@ -138,7 +138,7 @@ JWT_CONFIG = {
     'jti': "jti",
     'lifetime': timedelta(minutes=5), # token lifetime, this will example in 5 mins
 
-    'json_encoder':json.JSONEncoder # token lifetime, this will example 
+    'json_encoder':json.JSONEncoder # token lifetime, this will be an example 
 }
 ```
 
@@ -156,9 +156,9 @@ In this scenario, selecting an RSA algorithm mandates configuring the `signing_s
 - ### `signing_secret_key`
 The signing key utilized for signing the content of generated tokens has distinct requirements based on the signing protocol. 
 For HMAC signing, it should be a randomly generated string containing at least as many bits as dictated by the signing protocol. 
-Conversely, for RSA signing, it should be a string encompassing an RSA private key with a length of 2048 bits or more.
-As Simple JWT defaults to 256-bit HMAC signing, the `signing_secret_key` setting automatically takes on the value of your django project's `SECRET_KEY`. 
-While this default is practical, it's advisable for developers to modify this setting to a value separate from the django project's secret key. 
+Conversely, an RSA signing should be a string encompassing an RSA private key with a length of 2048 bits or more.
+As Simple JWT defaults to 256-bit HMAC signing, the `signing_secret_key` setting automatically takes on the value of your Django project's `SECRET_KEY`. 
+While this default is practical, developers should modify this setting to a value separate from the Django project's secret key. 
 This adjustment facilitates easier token signing key changes if the key is ever compromised.
 
 - ### `verifying_secret_key`
@@ -184,7 +184,7 @@ Leeway provides a buffer for the expiration time, which can be defined as an int
 For further details, please consult the following link: https://pyjwt.readthedocs.io/en/latest/usage.html#expiration-time-claim-exp
 
 - ### `jti`
-The claim designated for storing a token's unique identifier, which is utilized to distinguish revoked tokens within the blacklist application. 
+The claim is designated for storing a token's unique identifier, which is utilized to distinguish revoked tokens within the blacklist application. 
 There might be instances where an alternative claim other than the default "jti" claim needs to be employed for storing this value
 
 - ### `json_encoder`
@@ -197,13 +197,13 @@ JSON Encoder class that will be used by the `PYJWT` to encode the `jwt_payload`.
 The `JwtService` uses [PYJWT](https://pypi.org/project/PyJWT/) underneath.
 
 ### _jwt_service.sign(payload: dict, headers: Dict[str, t.Any] = None, **jwt_config: t.Any) -> str_
-Creates a jwt token for the provided payload. Also, you can override default jwt config by using passing some keyword argument as a `jwt_config`
+Creates a jwt token for the provided payload. Also, you can override the default jwt config by using passing some keyword argument as a `jwt_config`
 
 ### _jwt_service.sign_async(payload: dict, headers: Dict[str, t.Any] = None, **jwt_config: t.Any) -> str_
 Async action for `jwt_service.sign`
 
 ### _jwt_service.decode(token: str, verify: bool = True, **jwt_config: t.Any) -> t.Dict[str, t.Any]:_
-Verifies and decodes provided token. And raises JWTException exception if token is invalid or expired
+Verifies and decodes provided token. And raises a JWTException exception if the token is invalid or expired
 
 ### _jwt_service.decode_async(token: str, verify: bool = True, **jwt_config: t.Any) -> t.Dict[str, t.Any]:_
 Async action for `jwt_service.decode`
