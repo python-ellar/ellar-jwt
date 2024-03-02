@@ -1,0 +1,4 @@
+-e .[crypto]
+-r requirements-tests.txt
+
+pre-commit
