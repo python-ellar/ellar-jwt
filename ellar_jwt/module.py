@@ -4,7 +4,7 @@ from datetime import timedelta
 
 from ellar.common import IModuleSetup, Module
 from ellar.core import Config, ModuleSetup
-from ellar.core.modules import DynamicModule, ModuleBase
+from ellar.core.modules import DynamicModule, ModuleBase, ModuleRefBase
 from ellar.di import ProviderConfig
 from pydantic import AnyHttpUrl
 
@@ -12,7 +12,7 @@ from .schemas import JWTConfiguration
 from .services import JWTService
 
 
-@Module()
+@Module(exports=[JWTService, JWTConfiguration])
 class JWTModule(ModuleBase, IModuleSetup):
     @classmethod
     def setup(
@@ -43,7 +43,7 @@ class JWTModule(ModuleBase, IModuleSetup):
         return DynamicModule(
             cls,
             providers=[
-                JWTService,
+                ProviderConfig(JWTService),
                 ProviderConfig(JWTConfiguration, use_value=configuration),
             ],
         )
@@ -54,14 +54,14 @@ class JWTModule(ModuleBase, IModuleSetup):
 
     @staticmethod
     def register_setup_factory(
-        module: t.Type["JWTModule"], config: Config
+        module_ref: ModuleRefBase, config: Config
     ) -> DynamicModule:
         if config.get("JWT_CONFIG") and isinstance(config.JWT_CONFIG, dict):
             schema = JWTConfiguration(**dict(config.JWT_CONFIG))
             return DynamicModule(
-                module,
+                module_ref.module,
                 providers=[
-                    JWTService,
+                    ProviderConfig(JWTService),
                     ProviderConfig(JWTConfiguration, use_value=schema),
                 ],
             )
