@@ -66,6 +66,8 @@ class JWTService:
         jwt_payload = Token(jwt_config=_jwt_config).build(
             serialize_object(payload.copy())
         )
+        if "sub" in jwt_payload:
+            jwt_payload["sub"] = str(jwt_payload["sub"])
 
         return jwt.encode(
             jwt_payload,
