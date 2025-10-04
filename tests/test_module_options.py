@@ -21,10 +21,10 @@ def test_jwt_module_configuration_case_1():
     )
     jwt_service: JWTService = tm.get(JWTService)
 
-    token = jwt_service.sign({"sub": 23})
+    token = jwt_service.sign({"sub": "23"})
     payload = jwt_service.decode(token)
 
-    assert payload["sub"] == 23
+    assert payload["sub"] == "23"
 
 
 def test_jwt_module_configuration_case_2():
@@ -42,10 +42,10 @@ def test_jwt_module_configuration_case_2():
     )
     jwt_service: JWTService = tm.get(JWTService)
 
-    token = jwt_service.sign({"sub": 23})
+    token = jwt_service.sign({"sub": "23"})
     payload = jwt_service.decode(token)
 
-    assert payload["sub"] == 23
+    assert payload["sub"] == "23"
 
 
 def test_jwt_module_configuration_case_2_fails():
